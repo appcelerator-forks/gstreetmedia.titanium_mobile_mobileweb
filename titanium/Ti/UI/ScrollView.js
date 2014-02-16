@@ -41,7 +41,6 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 				},
 				500
 			);
-
 		},
 
 		_handleDragStart: function() {
