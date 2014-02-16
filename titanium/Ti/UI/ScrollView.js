@@ -8,6 +8,7 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 		deceleration = 0.001;
 
 	return declare('Ti.UI.ScrollView', KineticScrollView, {
+		lastMouseWheelInterval : null,
 
 		constructor: function() {
 			var contentContainer;
@@ -28,10 +29,27 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 				dragging: false,
 				decelerating: false
 			});
+
+			if (this.lastMouseWheelInterval) {
+				clearInterval(this.lastMouseWheelInterval);
+			}
+			var self = this;
+			this.lastMouseWheelInterval = setInterval(
+				function() {
+					clearInterval(self.lastMouseWheelInterval);
+					self.fireEvent('scrollend');
+				},
+				500
+			);
+
 		},
 
 		_handleDragStart: function() {
 			this.fireEvent('dragStart');
+		},
+
+		_handleDragCancel: function() {
+			this.fireEvent('scrollend');
 		},
 
 		_handleDrag: function() {
