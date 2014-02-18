@@ -131,10 +131,11 @@ define(["Ti/_/browser", "Ti/_/declare", "Ti/UI/View", "Ti/_/lang", "Ti/_/dom", "
 			});
 
 			on(self, "draggingcancel", function(e) {
+				//TODO Fix Velocity Calculations
 				if (self.scrollingEnabled) {
 					var distance = calculateDistance(
 						startTranslationX, startTranslationY, self._currentTranslationX, self._currentTranslationY);
-					console.log("draggingcancel distance => " + distance);
+					//console.log("draggingcancel distance => " + distance);
 
 					self._animateToPosition(
 						startTranslationX,
