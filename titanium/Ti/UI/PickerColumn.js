@@ -73,6 +73,7 @@ define(["Ti/_/declare", "Ti/_/UI/FontWidget", "Ti/_/dom", "Ti/UI", 'Ti/_/has', "
 				}),
 				on(titleClickArea, clickEventName, function() {
 					// Create the window and a background to dim the current view
+
 					var listWindow = UI.createWindow(),
 						dimmingView = UI.createView({
 							backgroundColor: "#000",
@@ -114,12 +115,13 @@ define(["Ti/_/declare", "Ti/_/UI/FontWidget", "Ti/_/dom", "Ti/UI", 'Ti/_/has', "
 							title: "Cancel"
 						});
 
-					listTable.addEventListener("singletap", function(e) {
+					listTable.addEventListener("click", function(e) {
 						e.index in rows && (self.selectedRow = rows[e.index]);
 						listWindow.close();
 					});
 
-					cancelButton.addEventListener("singletap", function() {
+					cancelButton.addEventListener("click", function() {
+						//console.log("PickerColumn cancelButton.click");
 						listWindow.close();
 					});
 
@@ -272,6 +274,7 @@ define(["Ti/_/declare", "Ti/_/UI/FontWidget", "Ti/_/dom", "Ti/UI", 'Ti/_/has', "
 		properties: {
 			selectedRow: {
 				set: function(value) {
+
 					if (!value) {
 						this.font = void 0;
 						this.color = void 0;

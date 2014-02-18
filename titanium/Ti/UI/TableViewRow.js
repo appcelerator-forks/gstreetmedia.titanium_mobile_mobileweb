@@ -137,6 +137,9 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 			hasCheck: {
 				set: function(value, oldValue) {
 					if (value !== oldValue && !isDef(this.rightImage) && !this.hasChild) {
+						if (!isDef(this._rightImageView)) {
+							this._addRightImageView();
+						}
 						this._rightImageView.image = value ? checkImage : '';
 					}
 					return value;
@@ -145,6 +148,9 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 			hasChild: {
 				set: function(value, oldValue) {
 					if (value !== oldValue && !isDef(this.rightImage) && isDef(this._rightImageView)) {
+						if (!isDef(this._rightImageView)) {
+							this._addRightImageView();
+						}
 						this._rightImageView.image = value ? childImage : '';
 					}
 					return value;
@@ -153,6 +159,9 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 			hasDetail: {
 				set: function(value, oldValue) {
 					if (value !== oldValue && !isDef(this.rightImage) && !this.hasChild && !this.hasCheck) {
+						if (!isDef(this._rightImageView)) {
+							this._addRightImageView();
+						}
 						this._rightImageView.image = value ? detailImage : '';
 					}
 					return value;

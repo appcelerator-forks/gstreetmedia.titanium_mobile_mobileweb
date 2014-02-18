@@ -11,4 +11,4 @@ So Far:
 5. TableViewRow.js => doesn't correctly using left property to space elements
 6. TableViewSection.js => creates separators in dom rather than just using borderBottom
 7. _build.js => doesn't correctly parse font folder. Doesn't add font correctly. Doesn't prefetch fonts, so they mismeasure (FontWidget)
-8. More to come. 
+8. ImageView.js 'load' event doesn't fire due to incorrect context on "this". 

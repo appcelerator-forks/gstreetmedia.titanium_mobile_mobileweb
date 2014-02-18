@@ -144,11 +144,13 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 				section = this._tableViewSectionClicked;
 			if (eventFilter.test(type)) {
 				if (row && section) {
-
-					for (; i < sections.length; i += 2) {
+					//AJG removed double indexing.
+					//Note: Data (list of items) really should be independent of UI items
+					//The idea of counting separators the same as actual rows is nuts.
+					for (; i < sections.length; i++) { //TODO verify that this doesn't need to be i+=2
 						localIndex = sections[i]._rows._children.indexOf(row);
 						if (localIndex !== -1) {
-							index += Math.floor(localIndex / 2);
+							index += localIndex;
 							break;
 						} else {
 							index += sections[i].rowCount;
