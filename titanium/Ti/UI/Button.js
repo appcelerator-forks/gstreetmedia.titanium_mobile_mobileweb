@@ -132,7 +132,12 @@
 				},
 				value: true
 			},
-
+			font : {
+				set : function(value) {
+					this._buttonTitle.font = value;
+					return value;
+				}
+			},
 			image: {
 				set: function(value) {
 					this._buttonImage.image = value;
