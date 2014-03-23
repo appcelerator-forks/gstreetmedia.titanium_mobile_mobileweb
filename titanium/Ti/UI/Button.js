@@ -16,7 +16,9 @@
 		},
 		titlePost = {
 			post: function() {
-				this._buttonTitle.text = Locale._getString(this.titleid, this.title);
+				//For platform consistency, covert leading spaces to non-breaking
+				var text = Locale._getString(this.titleid, this.title);
+				this._buttonTitle.text = text.replace(/^[ \t]+/gm, function(x){ return new Array(x.length + 1).join('&nbsp;') });
 				this._hasSizeDimensions() && this._triggerLayout();
 			}
 		};

@@ -11,8 +11,14 @@ define(["Ti/_/Evented", "Ti/_/lang"], function(Evented, lang) {
 			HYBRID_TYPE: 2,
 			SATELLITE_TYPE: 1,
 			STANDARD_TYPE: 0,
-			TERRAIN_TYPE: 3
+			TERRAIN_TYPE: 3,
+
+			ANNOTATION_DRAG_STATE_START : 1,
+			ANNOTATION_DRAG_STATE_END : 2,
+			ANNOTATION_DRAG_STATE_DRAG : 3
 		},
+
+
 
 		createAnnotation: function(args) {
 			return new (require("Ti/Map/Annotation"))(args);

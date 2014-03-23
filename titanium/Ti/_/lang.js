@@ -93,7 +93,8 @@ define(['Ti/_/has'], function (has) {
 											},
 											set: function (v) {
 												if (!writable) {
-													throw new Error('Property "' + property + '" is read only');
+													//throw new Error('Property "' + property + '" is read only');
+													return;
 												}
 												var d = this.__values__[type],
 													args = [v, d[property], property];

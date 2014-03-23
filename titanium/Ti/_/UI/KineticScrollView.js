@@ -128,7 +128,7 @@ define(["Ti/_/browser", "Ti/_/declare", "Ti/UI/View", "Ti/_/lang", "Ti/_/dom", "
 					self._setTranslation(previousTranslationX = translationX, previousTranslationY = translationY);
 					self._handleDrag && self._handleDrag(e);
 
-					self._updateCurrentTranslations();
+					//self._updateCurrentTranslations();
 				}
 			});
 

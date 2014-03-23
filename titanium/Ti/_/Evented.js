@@ -38,8 +38,16 @@ define(function() {
 				listeners = this.listeners && this.listeners[name],
 				l = modifiers && modifiers.length;
 			data = data || {};
+
+			var source = data.source || this;
+			if (source && source.touchEnabled === false) {
+				//Child elements, !touchEnabled, should never be the source of an event
+				source = this;
+			}
+
 			mix(data, {
-				source: data.source || this,
+				parent : data._parent || this,
+				source: source,
 				type: name
 			});
 

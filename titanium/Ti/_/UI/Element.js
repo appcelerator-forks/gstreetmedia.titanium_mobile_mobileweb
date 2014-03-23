@@ -643,7 +643,7 @@ define(
 				set: function(value, oldValue) {
 
 					// Type and colors are required
-					if (!is(value.type,'String') || !is(value.colors,'Array') || value.colors.length < 2) {
+					if (!value || !is(value.type,'String') || !is(value.colors,'Array') || value.colors.length < 2) {
 						return;
 					}
 

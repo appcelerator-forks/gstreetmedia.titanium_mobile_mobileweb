@@ -1,7 +1,14 @@
 define(["Ti/_/declare", "Ti/_/Evented", "Ti/Locale"], function(declare, Evented, Locale) {
 
+
+
 	var updateHook = {
 		post: function(newValue, oldValue, prop) {
+			if (this.mapView && this.marker) {
+				this.mapView._updateAnnotation(this, prop, newValue);
+			} else {
+				//console.log("either no mapView or no marker");
+			}
 			this.fireEvent("update", {
 				property: prop,
 				value: newValue,
@@ -18,9 +25,50 @@ define(["Ti/_/declare", "Ti/_/Evented", "Ti/Locale"], function(declare, Evented,
 				clicksource: src,
 				index: idx,
 				map: mapview,
-				title: this.title
+				title: this.title,
+				itemId : this.itemId
 			});
 		},
+
+		_ondragstart: function(mapview) {
+			this.fireEvent("pinchangedragstate", {
+				annotation: this,
+				map: mapview,
+				title: this.title,
+				type : "pinchangedragstate",
+				newState : Ti.Map.ANNOTATION_DRAG_STATE_START,
+				itemId : this.itemId
+			});
+		},
+
+		_ondrag : function(mapview) {
+			this.fireEvent("pinchangedragstate", {
+				annotation: this,
+				map: mapview,
+				title: this.title,
+				type : "pinchangedragstate",
+				newState : Ti.Map.ANNOTATION_DRAG_STATE_DRAG,
+				itemId : this.itemId
+			});
+		},
+
+		_ondragend: function(mapview) {
+			this.fireEvent("pinchangedragstate", {
+				annotation: this,
+				map: mapview,
+				title: this.title,
+				type : "pinchangedragstate",
+				newState : Ti.Map.ANNOTATION_DRAG_STATE_END,
+				itemId : this.itemId
+			});
+		},
+
+		//ANNOTATION_DRAG_STATE_START : 0,
+		//ANNOTATION_DRAG_STATE_END : 1
+
+		//marker : null, //Set/Created by Google.js in _createMarker
+
+		//mapView : null, //Set/Created by Google.js in _createMarker
 
 		_update: function() {},
 
@@ -30,6 +78,10 @@ define(["Ti/_/declare", "Ti/_/Evented", "Ti/Locale"], function(declare, Evented,
 
 		_getSubtitle: function() {
 			return Locale._getString(this.subtitleid, this.subtitle);
+		},
+
+		_getImage : function() {
+			return this.image;
 		},
 
 		properties: {
@@ -43,7 +95,9 @@ define(["Ti/_/declare", "Ti/_/Evented", "Ti/Locale"], function(declare, Evented,
 			subtitle: updateHook,
 			subtitleid: updateHook,
 			title: updateHook,
-			titleid: updateHook
+			titleid: updateHook,
+			draggable : updateHook,
+			itemId : updateHook
 		}
 
 	});
