@@ -420,6 +420,13 @@ define(['Ti/_/declare', 'Ti/_/dom', 'Ti/_/event', 'Ti/_/lang', 'Ti/App/Propertie
 						this.fireEvent('complete');
 					}
 
+					if (isNaN(region.latitude) ||
+						isNaN(region.longitude) ||
+						isNaN(region.latitudeDelta) ||
+						isNaN(region.longitudeDelta)) {
+						return;
+					}
+
 					this.fireEvent('regionchanged', region);
 				},
 

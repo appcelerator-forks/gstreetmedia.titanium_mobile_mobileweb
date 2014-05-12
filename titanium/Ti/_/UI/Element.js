@@ -156,7 +156,8 @@ define(
 			this._parent = view;
 		},
 
-		_add: function(view, hidden) {
+		_add: function(view, hidden, isTriggerLayout) {
+
 
 			view._hidden = hidden;
 

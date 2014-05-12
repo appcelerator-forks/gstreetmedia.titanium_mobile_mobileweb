@@ -28,7 +28,7 @@ define(["Ti/_/declare", "Ti/_/UI/TextBox", "Ti/_/css", "Ti/_/dom", "Ti/_/lang", 
 			this._disconnectBlurEvent = on(field, "blur", this, function() {
 				this._focused = 0;
 				this._updateInternalText();
-				this.domNode.style.color = "#999";
+				//this.domNode.style.color = "#999";
 			});
 		},
 
@@ -107,6 +107,20 @@ define(["Ti/_/declare", "Ti/_/UI/TextBox", "Ti/_/css", "Ti/_/dom", "Ti/_/lang", 
 						css.remove(n, s + borderStyles[oldValue]);
 						css.add(n, s + borderStyles[value]);
 					}
+					return value;
+				}
+			},
+
+			paddingLeft : {
+				set: function(value, oldValue) {
+					this._field.style.paddingLeft = value + "px";
+					return value;
+				}
+			},
+
+			paddingRight : {
+				set: function(value, oldValue) {
+					this._field.style.paddingLeft = value + "px";
 					return value;
 				}
 			},

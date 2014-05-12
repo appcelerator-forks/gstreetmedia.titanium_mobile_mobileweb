@@ -196,7 +196,7 @@ define(["Ti/_/browser", "Ti/_/declare", "Ti/UI/View", "Ti/_/lang", "Ti/_/dom", "
 			var mouseWheelEvent = navigator.userAgent.indexOf("Firefox") != -1 ? "DOMMouseScroll" : "mousewheel";
 			enableMouseWheel && (this._disconnectMouseWheelEvent = on(self.domNode, mouseWheelEvent,function(e) {
 				if (self.scrollingEnabled) {
-
+					//console.log("onMouseWheel");
 					if (mouseWheelEvent == "DOMMouseScroll") { //Patch Firefox
 						e.wheelDeltaY = - e.detail * 40; //Normalize Value (FF "detail" is either 3 or -3)
 						e.wheelDeltaX = 0;

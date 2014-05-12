@@ -96,6 +96,7 @@ define(['Ti/_/declare', 'Ti/_/Evented', 'Ti/_/style', 'Ti/UI'], function(declare
 	}
 
 	function render() {
+		//console.log("animation:render");
 		var wid,
 			anis,
 			ani,

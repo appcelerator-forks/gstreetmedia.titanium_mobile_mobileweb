@@ -14,7 +14,10 @@ define(["Ti/_/declare", "Ti/_/UI/TextBox", "Ti/_/dom", "Ti/_/css", "Ti/_/style",
 		constructor: function(args) {
 			var field = dom.create("textarea", {
 				autocomplete: "off",
-				className: "TiUITextFieldInput"
+				className: "TiUITextFieldInput",
+				style : {
+					padding: "10px"
+				}
 			}, this.domNode);
 
 			this._initTextBox(field);

@@ -52,6 +52,7 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 		},
 
 		_handleDrag: function() {
+
 			this.fireEvent('scroll',{
 				x: -this._currentTranslationX,
 				y: -this._currentTranslationY,

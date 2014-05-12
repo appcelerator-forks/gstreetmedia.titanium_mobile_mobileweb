@@ -17,9 +17,7 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 
 		constructor: function() {
 			this._layout = new ConstrainingHorizontal({ element: this });
-            if (!isDef(this._centerContainer)) {
-                this._addCenterContainer();
-            }
+
 		},
 
         _addCenterContainer : function() {
@@ -47,6 +45,10 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 
         _addLeftImageView : function() {
 
+			if (!isDef(this._centerContainer)) {
+				this._addCenterContainer();
+			}
+
             this._leftImageView = UI.createImageView({
                 width: UI.SIZE,
                 height: UI.SIZE
@@ -57,11 +59,12 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
             } else {
                 this._add(this._leftImageView);
             }
-			this._centerContainer.left = 0;
+
 			this._leftImageView.left = this._marginLeft;
         },
 
         _addRightImageView : function() {
+
             this._rightImageView = UI.createImageView({
                 right: 0,
                 width: UI.SIZE,
@@ -107,6 +110,9 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 
 		_updatePadding: function() {
 			// Fake padding with a transparent border
+			if (!isDef(this._centerContainer)) {
+				return;
+			}
 			this._contentContainer.borderWidth = [this.leftImage ? 5 : 0, this.rightImage ? 5 : 0, 0, 0];
             if (this._titleLabel) {
                 this._titleLabel.borderWidth = this._contentContainer.borderWidth;
@@ -114,11 +120,18 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 		},
 
 		add: function(view) {
+			if (!isDef(this._centerContainer)) {
+				this._addCenterContainer();
+			}
+
 			this._contentContainer._add(view);
 			this._publish(view);
 		},
 
 		remove: function(view) {
+			if (!isDef(this._centerContainer)) {
+				return;
+			}
 			this._contentContainer._remove(view);
 			this._unpublish(view);
 		},
@@ -127,10 +140,12 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 			className: void 0,
 			color: {
 				set: function(value) {
-                    if (!isDef(this._titleLabel)) {
-                        this._addTitleLabel();
-                    }
-					this._titleLabel.color = value;
+                    //if (!isDef(this._titleLabel)) {
+                        //this._addTitleLabel();
+                    //}
+					if (isDef(this._titleLabel)) {
+						this._titleLabel.color = value;
+					}
 					return value;
 				}
 			},
@@ -208,10 +223,15 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 			selectedColor: void 0,
 			title: {
 				set: function(value) {
-                    if (!isDef(this._titleLabel)) {
-                        this._addTitleLabel();
-                    }
-					this._titleLabel.text = value;
+					//console.log("TableViewRow set title label = " + value);
+					if (value && value != "") {
+						if (!isDef(this._titleLabel)) {
+							this._addTitleLabel();
+						}
+					}
+					if (this._titleLabel) {
+						this._titleLabel.text = value;
+					}
 					return value;
 				}
 			},
@@ -221,20 +241,20 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/css', 'Ti/_
 				set: function(value) {
                     if (!isDef(this._titleLabel)) {
                         this._addTitleLabel();
-                    }
+                   	}
 					this._titleLabel.font = value;
 					return value;
 				}
 			},
 			left : {
 				set : function(value) {
-					if (this._leftImageView) {
+					if (isDef(this._leftImageView)) {
 						this._leftImageView.left = value;
 					}
-					if (this._centerContainer) {
+					if (isDef(this._centerContainer)) {
 						this._centerContainer.left = value;
 					}
-					if (this._rightImageView) {
+					if (isDef(this._rightImageView)) {
 						this._rightImageView.left = value;
 					}
 					if (isDef(this._leftImageView) || isDef(this._centerContainer) || isDef(this._rightImageView)) {

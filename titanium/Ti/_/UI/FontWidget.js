@@ -4,7 +4,7 @@ define(["Ti/_/declare", "Ti/_/dom", "Ti/_/lang", "Ti/_/ready", "Ti/_/style", "Ti
 	var textRuler;
 
 	ready(function() {
-		textRuler = dom.create("p", {
+		textRuler = dom.create("div", {
 			style: {
 				position: "absolute",
 				top: "-1000em",

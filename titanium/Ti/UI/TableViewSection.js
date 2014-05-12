@@ -113,7 +113,7 @@ define(['Ti/_/declare', 'Ti/_/lang', 'Ti/_/UI/Widget', 'Ti/_/style','Ti/UI/Mobil
 			this._rows._insertAt(value, index);
 			value._tableViewSection = this;
 			this.rowCount++;
-			this._refreshRows();
+			//this._refreshRows();
 		},
 
 		add: function(value, index) {

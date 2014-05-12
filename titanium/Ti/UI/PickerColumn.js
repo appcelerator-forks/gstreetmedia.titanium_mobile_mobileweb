@@ -72,6 +72,7 @@ define(["Ti/_/declare", "Ti/_/UI/FontWidget", "Ti/_/dom", "Ti/UI", 'Ti/_/has', "
 					}
 				}),
 				on(titleClickArea, clickEventName, function() {
+					return;
 					// Create the window and a background to dim the current view
 
 					var listWindow = UI.createWindow(),
@@ -246,6 +247,19 @@ define(["Ti/_/declare", "Ti/_/UI/FontWidget", "Ti/_/dom", "Ti/UI", 'Ti/_/has', "
 				this.selectedRow = row;
 			}
 			this._publish(row);
+		},
+
+		addRows : function(rows) {
+			for (var i = 0; i < rows.length; i++) {
+				this.rows.push(rows[i]);
+				rows[i]._parentColumn = this;
+				this._publish(rows[i]);
+			}
+			this._updateContentWidth();
+			this._parentPicker && this._parentPicker._updateColumnHeights();
+			if (!this.selectedRow) {
+				this.selectedRow = rows[0];
+			}
 		},
 
 		removeRow: function(row) {
