@@ -213,6 +213,7 @@ define(['Ti/_/declare', 'Ti/UI/View', 'Ti/_/dom', 'Ti/_/has', 'Ti/_/style', 'Ti/
 			if (view) {
 				view.width = '100%';
 				view.height = '100%';
+				view.top = 0;
 				this.views.push(view);
 				this._contentContainer._add(view);
 				if (this.views.length == 1) {

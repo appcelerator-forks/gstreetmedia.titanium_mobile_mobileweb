@@ -359,13 +359,13 @@ define(['Ti/_/declare', 'Ti/_/UI/KineticScrollView', 'Ti/_/style', 'Ti/_/lang', 
 							if (value[i].declaredClass === 'Ti.UI.TableViewRow') {
 								// Check if we need a default section
 								if (!this._currentSection) {
-									console.log("TableView::creating section");
+									//console.log("TableView::creating section");
 									this.appendSection(this._currentSection = UI.createTableViewSection({_tableView: this}));
 									retval.push(this._currentSection);
 								}
 								this._currentSection.add(value[i]); // We call the normal .add() method to hook into the sections proper add mechanism
 							} else if (value[i].declaredClass === 'Ti.UI.TableViewSection') {
-								console.log("TableView::adding section");
+								//console.log("TableView::adding section");
 								value[i]._tableView = this;
 								this.appendSection(this._currentSection = value[i]);
 								retval.push(this._currentSection);
